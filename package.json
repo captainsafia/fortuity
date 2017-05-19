@@ -1,0 +1,28 @@
+{
+  "name": "fortuity",
+  "version": "1.0.0",
+  "description": "A CLI that prints inspirational quotes on shell start",
+  "main": "index.js",
+  "bin": {
+    "fortuity": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captainsafia/fortuity.git"
+  },
+  "keywords": [
+    "cli",
+    "inspiration",
+    "quotes",
+    "fun"
+  ],
+  "author": "Safia Abdalla <safia@safia.rocks>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/captainsafia/fortuity/issues"
+  },
+  "homepage": "https://github.com/captainsafia/fortuity#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
+}
