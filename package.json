@@ -1,6 +1,6 @@
 {
   "name": "fortuity",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI that prints inspirational quotes on shell start",
   "main": "index.js",
   "bin": {
