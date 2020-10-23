@@ -2,6 +2,9 @@
 "use strict";
 
 const r = require("request");
+const fs = require('fs');
+const data = require('data');
+const s = require('string');
 
 const options = {
   url: "http://api.forismatic.com/api/1.0/",
@@ -15,12 +18,20 @@ const options = {
 };
 
 const MAX_RETRIES = 5;
-let retries = 0;
+var retries = 0;
 
 function run() {
   retries = retries + 1;
   if (retries >= MAX_RETRIES) {
-    return console.log(`timeout after ${MAX_RETRIES}`);
+    function offline() {
+      fs.readFile('offline.txt', function(err, data){
+        if(err) throw err;
+        var lines = s(data).splitLeft("\n");
+        var errortries = lines[Math.floor(Math.random()*lines.length)];
+        return console.log(errortries);
+      });
+    }
+    offline();
   }
   return r(options, function(error, response, body) {
     if (error) console.error(error);
@@ -28,12 +39,10 @@ function run() {
       return console.log(`${body.quoteText.trim()} -- ${body.quoteAuthor.trim()}`);
     }
     if (response.statusCode > 200) {
-      return console.error(
-        `Error: ${response.statusCode} - ${response.statusMessage}`
-      );
-    }
-    if (!body.quoteText || !body.quoteAuthor) {
       run();
+    }
+    if (retries === 6) {
+      process.exit();
     }
   });
 }
